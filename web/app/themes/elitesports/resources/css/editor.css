@@ -1,0 +1,14 @@
+@import "./app.css";
+
+/* Match the front-end dark background inside the block editor canvas. */
+.editor-styles-wrapper {
+  background-color: var(--color-ink);
+  color: var(--color-cream);
+}
+
+/* Enlarge the page title field in the editor. */
+.editor-post-title__input,
+.editor-post-title__block .editor-post-title__input,
+.wp-block-post-title {
+  font-size: 3rem;
+}

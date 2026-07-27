@@ -1,0 +1,237 @@
+/* -------------------------------------------------------------------------
+   Native Gutenberg content — brand typography
+
+   Styles the output of core WordPress blocks (headings, paragraphs, lists,
+   quotes, tables, etc.) so plain Gutenberg content matches the ACF block
+   design system (fonts, colors, spacing from .prose-brand).
+
+   Scoped to `.gutenberg-content` and written with :where() so every rule has
+   ZERO specificity — any ACF block that nests inside (with its own Tailwind
+   utilities or .prose-brand rules) always overrides these defaults.
+
+   Applied to:
+     - the Container block inner wrapper (blocks/container.blade.php)
+     - the page/post content wrappers (partials/content-page, content-single)
+
+   Theme tokens (var(--color-*), var(--font-*)) are emitted to :root by
+   app.css @theme, so plain CSS may reference them here.
+   ------------------------------------------------------------------------- */
+
+:where(.gutenberg-content) {
+  color: rgba(255, 255, 255, 0.78);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.75;
+  overflow-wrap: break-word;
+}
+
+:where(.gutenberg-content) > :first-child {
+  margin-top: 0;
+}
+
+:where(.gutenberg-content) > :last-child {
+  margin-bottom: 0;
+}
+
+/* Reset the first/last inner block's outer margin so content sits flush to the
+   top/bottom of its container. ACF wraps InnerBlocks in an
+   `.acf-innerblocks-container`, so the real first block (e.g. an h1) is a
+   grandchild of the wrapper — reset it directly. Covers both the plain
+   container and the boxed (.section-frame) variant. With an eyebrow present,
+   the .kicker sits above the innerblocks wrapper and provides the spacing. */
+:where(.gutenberg-content) .acf-innerblocks-container > :first-child {
+  margin-top: 0;
+}
+
+:where(.gutenberg-content) .acf-innerblocks-container > :last-child {
+  margin-bottom: 0;
+}
+
+/* Body copy */
+:where(.gutenberg-content) p {
+  margin: 0 0 1.1em;
+}
+
+/* Headings */
+:where(.gutenberg-content) :is(h1, h2, h3, h4, h5, h6),
+:where(.gutenberg-content) .wp-block-heading {
+  margin: 1.6em 0 0.6em;
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+:where(.gutenberg-content) h1 {
+  font-size: clamp(2.5rem, 6vw, 3.5rem);
+}
+
+:where(.gutenberg-content) h2 {
+  font-size: clamp(1.9rem, 4vw, 2.6rem);
+}
+
+:where(.gutenberg-content) h3 {
+  font-size: clamp(1.5rem, 3vw, 1.9rem);
+}
+
+:where(.gutenberg-content) h4 {
+  font-size: 1.25rem;
+}
+
+:where(.gutenberg-content) :is(h5, h6) {
+  font-size: 1.05rem;
+  letter-spacing: 0.04em;
+}
+
+/* Inline emphasis */
+:where(.gutenberg-content) :is(strong, b) {
+  color: #fff;
+  font-weight: 700;
+}
+
+:where(.gutenberg-content) :is(em, i) {
+  font-style: italic;
+}
+
+/* Links */
+:where(.gutenberg-content) a {
+  color: #ffd3a4;
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: rgba(246, 166, 93, 0.5);
+  text-underline-offset: 0.22em;
+  transition:
+    color 180ms ease,
+    text-decoration-color 180ms ease;
+}
+
+:where(.gutenberg-content) a:hover {
+  color: #fff;
+  text-decoration-color: rgba(246, 166, 93, 0.85);
+}
+
+/* Lists */
+:where(.gutenberg-content) :is(ul, ol) {
+  margin: 0 0 1.1em;
+  padding-left: 1.35rem;
+}
+
+:where(.gutenberg-content) ul {
+  list-style: disc;
+}
+
+:where(.gutenberg-content) ol {
+  list-style: decimal;
+}
+
+:where(.gutenberg-content) li {
+  margin: 0.35em 0;
+  padding-left: 0.2rem;
+}
+
+:where(.gutenberg-content) li::marker {
+  color: rgba(246, 166, 93, 0.74);
+}
+
+/* Nested lists tighten up */
+:where(.gutenberg-content) li > :is(ul, ol) {
+  margin: 0.35em 0 0.35em;
+}
+
+/* Quotes */
+:where(.gutenberg-content) blockquote {
+  margin: 1.4em 0;
+  padding: 0.4em 0 0.4em 1.1em;
+  border-left: 2px solid rgba(246, 140, 41, 0.55);
+  color: rgba(255, 255, 255, 0.9);
+  font-style: italic;
+}
+
+:where(.gutenberg-content) blockquote cite {
+  display: block;
+  margin-top: 0.6em;
+  font-size: 0.85rem;
+  font-style: normal;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+/* Horizontal rule / separator */
+:where(.gutenberg-content) hr {
+  margin: 2em 0;
+  border: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Code */
+:where(.gutenberg-content) :is(code, kbd, samp) {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.9em;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 0.35em;
+  padding: 0.15em 0.4em;
+}
+
+:where(.gutenberg-content) pre {
+  margin: 1.4em 0;
+  padding: 1.1em 1.25em;
+  overflow-x: auto;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.75rem;
+}
+
+:where(.gutenberg-content) pre code {
+  background: none;
+  padding: 0;
+}
+
+/* Tables */
+:where(.gutenberg-content) table {
+  width: 100%;
+  margin: 1.4em 0;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+:where(.gutenberg-content) :is(th, td) {
+  padding: 0.7em 0.9em;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  text-align: left;
+}
+
+:where(.gutenberg-content) th {
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* Figures / images / captions */
+:where(.gutenberg-content) figure {
+  margin: 1.6em 0;
+}
+
+:where(.gutenberg-content) img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.75rem;
+}
+
+:where(.gutenberg-content) figcaption {
+  margin-top: 0.6em;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.55);
+  text-align: center;
+}
+
+/* Buttons rendered by the core Buttons block keep their own look, but give a
+   sensible brand default when unstyled. */
+:where(.gutenberg-content) .wp-block-button__link {
+  color: #fff;
+  text-decoration: none;
+}
