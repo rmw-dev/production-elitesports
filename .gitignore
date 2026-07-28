@@ -22,6 +22,10 @@ web/.htaccess
 
 # Composer HTTP basic auth (ACF Pro license key)
 auth.json
+
+# Trellis deploy tooling lives here but is deployed FROM, not deployed TO.
+# Keep it out of the site repo/releases; version it separately if desired.
+/trellis
 .env.*
 !.env.example
 

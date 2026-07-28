@@ -5,7 +5,7 @@
     <div class="ambient-grid"></div>
   </div>
 
-  <div class="relative mx-auto max-w-5xl px-6 pb-20 pt-36 lg:px-8 lg:pb-28 lg:pt-44">
+  <div class="relative mx-auto max-w-5xl px-6 pb-20 pt-16 lg:px-8 lg:pb-28 lg:pt-24">
     <article class="privacy-policy-page">
       @if ($eyebrow)
         <p class="kicker">{{ $eyebrow }}</p>

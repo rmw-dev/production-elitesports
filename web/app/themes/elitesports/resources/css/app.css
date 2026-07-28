@@ -930,6 +930,17 @@
   color: #f6a65d;
 }
 
+/* An eyebrow (.kicker) sits directly above a heading in most blocks. The
+   heading's prose/gutenberg top margin (1.6em — 179px at the hero's 112px font)
+   is unlayered CSS that beats Tailwind's `mt-*` utilities, and stacks on top of
+   the kicker's own spacing (and any flex `gap`), creating an oversized gap.
+   Collapse the heading's top margin so the kicker's spacing alone sets the
+   rhythm. Specificity (0,1,1) beats the :where()-scoped heading rule. */
+.kicker + :is(h1, h2, h3, h4, h5, h6),
+.kicker + .wp-block-heading {
+  margin-top: 0;
+}
+
 .surface-card {
   border: 1px solid var(--color-border);
   border-radius: 1.75rem;
@@ -1098,6 +1109,15 @@ section.wp-block-media-text {
     border-color 300ms ease,
     background 300ms ease,
     box-shadow 300ms ease;
+}
+
+/* The pillar heading is an ACF-block <h3> that nests inside .gutenberg-content,
+   so it inherits the prose heading margin (1.6em/0.6em). Inside the
+   `items-center` grid that margin inflates the heading's cell and pushes its
+   text below the icon/number, breaking alignment. Reset it (unlayered, so it
+   beats the :where()-scoped prose rule) — the grid handles the spacing. */
+.training-pillar-card h3 {
+  margin: 0;
 }
 
 .training-pillar-card::before,

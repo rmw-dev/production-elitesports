@@ -1,4 +1,4 @@
-<section {{ $attributes->merge(['class' => trim("relative $paddingClasses $backgroundClass " . ($firstBlock ? 'pt-36 lg:pt-44' : ''))]) }}>
+<section {{ $attributes->merge(['class' => trim("relative $paddingClasses $backgroundClass " . ($firstBlock ? 'pt-16 lg:pt-24' : ''))]) }}>
   <div class="gutenberg-content mx-auto max-w-7xl px-6 lg:px-8">
     @if ($boxed)
       <div class="section-frame">

@@ -20,7 +20,7 @@
   width: 100%;
   min-height: 100svh;
   align-items: flex-end;
-  padding: 7.5rem 1rem 7.25rem;
+  padding: 4rem 1rem 3.5rem;
 }
 
 @supports (min-height: 100dvh) {

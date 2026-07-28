@@ -5,7 +5,7 @@
 @endphp
 
 <section {{ $attributes->merge(['class' => trim("relative $paddingClasses $backgroundClass")]) }}>
-  <div class="relative mx-auto max-w-7xl px-6 pb-14 pt-36 lg:px-8 lg:pb-20 lg:pt-44">
+  <div class="relative mx-auto max-w-7xl px-6 pb-14 pt-16 lg:px-8 lg:pb-20 lg:pt-24">
     <div class="section-frame overflow-hidden px-6 py-10 md:px-10 md:py-14 lg:px-12 lg:py-16">
       @if ($imageUrl)
         <img
