@@ -1061,7 +1061,6 @@ section.wp-block-media-text {
     min-height: 100%;
     flex-direction: column;
     justify-content: space-between;
-    gap: clamp(2rem, 3vw, 4rem);
   }
 
   .why-esa-body,

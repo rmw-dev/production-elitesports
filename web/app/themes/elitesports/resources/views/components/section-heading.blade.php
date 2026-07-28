@@ -1,6 +1,7 @@
 @props([
     'eyebrow' => '',
     'title' => '',
+    'titleUppercase' => false,
     'body' => '',
     'align' => 'left',
     'class' => '',
@@ -16,7 +17,7 @@
     @endif
 
     @if ($title)
-        <h2 class="font-display text-4xl leading-none text-white md:text-5xl">{!! $title !!}</h2>
+        <x-heading as="h2" :text="$title" :uppercase="$titleUppercase" class="font-display text-4xl leading-none text-white md:text-5xl" />
     @endif
 
     @if ($body)

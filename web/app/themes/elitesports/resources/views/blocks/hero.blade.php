@@ -138,7 +138,7 @@
             @endif
 
             @if ($cardSupport)
-              <div class="prose-brand mt-3 text-lg leading-tight text-white sm:mt-4 sm:text-xl xl:text-2xl 2xl:text-3xl">{!! $cardSupport !!}</div>
+              <div class="mt-3 text-lg leading-tight text-white sm:mt-4 text-xl">{!! $cardSupport !!}</div>
             @endif
 
             @if ($stats)

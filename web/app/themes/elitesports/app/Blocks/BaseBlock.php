@@ -33,6 +33,32 @@ abstract class BaseBlock extends Block
     }
 
     /**
+     * Add a heading field (multi-line textarea) plus a sibling "Uppercase"
+     * toggle.
+     *
+     * Headings render with author newlines preserved; the toggle forces an
+     * uppercase treatment (default off, i.e. shown as typed). Works at the top
+     * level or inside a repeater/group — pass that builder as $builder.
+     */
+    protected function addHeading($builder, string $name = 'title', array $args = []): void
+    {
+        $label = $args['label'] ?? 'Title';
+
+        $builder->addTextarea($name, array_merge([
+            'label' => $label,
+            'rows' => 2,
+            'new_lines' => '',
+        ], $args));
+
+        $builder->addTrueFalse("{$name}_uppercase", [
+            'label' => "{$label} — uppercase",
+            'instructions' => 'Display this heading in uppercase.',
+            'ui' => 1,
+            'default_value' => 0,
+        ]);
+    }
+
+    /**
      * The block field group.
      *
      * Composes the extending block's fields and appends the shared

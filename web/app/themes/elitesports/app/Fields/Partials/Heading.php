@@ -23,9 +23,17 @@ class Heading extends Partial
                 'label' => 'Eyebrow',
                 'default_value' => $eyebrowDefault,
             ])
-            ->addText('title', [
+            ->addTextarea('title', [
                 'label' => 'Title',
+                'rows' => 2,
+                'new_lines' => '',
                 'default_value' => $titleDefault,
+            ])
+            ->addTrueFalse('title_uppercase', [
+                'label' => 'Title — uppercase',
+                'instructions' => 'Display this heading in uppercase.',
+                'ui' => 1,
+                'default_value' => 0,
             ])
             ->addWysiwyg('body', [
                 'label' => 'Body',

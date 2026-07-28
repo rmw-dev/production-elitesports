@@ -7,7 +7,7 @@
   <div class="mx-auto max-w-7xl px-6 lg:px-8">
     <div class="section-frame">
       <div class="why-esa-grid">
-        <div class="why-esa-copy-column">
+        <div class="why-esa-copy-column gap-4">
           <div>
             @if ($eyebrow)
               <p class="kicker">{{ $eyebrow }}</p>
