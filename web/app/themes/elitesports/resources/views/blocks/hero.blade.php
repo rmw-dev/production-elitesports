@@ -97,7 +97,7 @@
         @endif
 
         @if ($subhead)
-          <div class="hero-subhead prose-brand mt-6">{!! $subhead !!}</div>
+          <div class="hero-subhead prose-brand mb-6">{!! $subhead !!}</div>
         @endif
 
         @if ($micro)
@@ -146,10 +146,10 @@
                 @foreach ($stats as $stat)
                   <div class="rounded-[22px] border border-white/12 bg-black/24 px-3.5 py-2.5 lg:py-3 xl:px-4 xl:py-3.5">
                     @if (! empty($stat['value']))
-                      <p class="font-display text-[2rem] uppercase leading-none text-white sm:text-[2.4rem] xl:text-3xl 2xl:text-4xl">{{ $stat['value'] }}</p>
+                      <p class="font-display text-[2rem] uppercase leading-none !mb-2 text-white sm:text-[2.4rem] xl:text-3xl 2xl:text-4xl">{{ $stat['value'] }}</p>
                     @endif
                     @if (! empty($stat['label']))
-                      <p class="mt-1.5 text-[0.6rem] uppercase tracking-[0.2em] text-white/56 sm:text-[0.68rem] xl:text-[0.7rem] 2xl:text-xs">{{ $stat['label'] }}</p>
+                      <p class="mt-1.5 text-[0.6rem] uppercase tracking-[0.2em] !mb-2 text-white/56 sm:text-[0.68rem] xl:text-[0.7rem] 2xl:text-xs">{{ $stat['label'] }}</p>
                     @endif
                     @if (! empty($stat['link_label']) && ! empty($stat['link_url']))
                       <a

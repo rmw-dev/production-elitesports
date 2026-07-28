@@ -36,6 +36,7 @@ class Faq extends BaseBlock
         return [
             'eyebrow' => get_field('eyebrow'),
             'title' => get_field('title'),
+            'titleUppercase' => (bool) get_field('title_uppercase'),
             'image' => get_field('image') ?: [],
             'items' => get_field('items') ?: [],
         ];

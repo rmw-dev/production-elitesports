@@ -10,7 +10,7 @@
     <div class="section-frame p-6 md:p-8 lg:p-10">
       <div class="grid items-center gap-10 lg:grid-cols-[0.92fr_1.08fr] lg:gap-16">
         <div class="flex flex-col gap-6 {{ $orderCopy }}">
-          <x-section-heading :eyebrow="$eyebrow" :title="$title" :body="$body" />
+          <x-section-heading :eyebrow="$eyebrow" :title="$title" :title-uppercase="$titleUppercase" :body="$body" />
 
           @if ($bullets)
             <ul class="flex max-w-2xl flex-col gap-3">

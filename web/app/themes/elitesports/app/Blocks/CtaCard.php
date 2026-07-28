@@ -37,6 +37,7 @@ class CtaCard extends BaseBlock
         return [
             'label' => get_field('label'),
             'title' => get_field('title'),
+            'titleUppercase' => (bool) get_field('title_uppercase'),
             'body' => get_field('body'),
             'buttons' => get_field('buttons') ?: [],
             'image' => get_field('image') ?: [],

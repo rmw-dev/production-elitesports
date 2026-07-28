@@ -193,7 +193,7 @@
 .prose-brand {
   color: rgba(255, 255, 255, 0.78);
   font-family: var(--font-sans);
-  font-size: 1rem;
+  font-size: 1.2rem;
   line-height: 1.75;
   overflow-wrap: break-word;
 }

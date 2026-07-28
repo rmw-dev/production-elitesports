@@ -9,7 +9,7 @@
   <div class="mx-auto max-w-7xl px-6 lg:px-8">
     <div class="section-frame">
       <div class="grid gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-start">
-        <x-section-heading :eyebrow="$eyebrow" :title="$title" :body="$body" />
+        <x-section-heading :eyebrow="$eyebrow" :title="$title" :title-uppercase="$titleUppercase" :body="$body" />
 
         @if ($stats)
           <div class="mt-8 grid gap-4 sm:grid-cols-3">

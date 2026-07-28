@@ -7,7 +7,7 @@
   <div class="mx-auto max-w-7xl px-6 lg:px-8">
     <div class="section-frame">
       <div class="grid gap-8 xl:grid-cols-[minmax(0,1.08fr)_minmax(28rem,1.32fr)] xl:items-start">
-        <x-section-heading :eyebrow="$eyebrow" :title="$title" :body="$body" class="future-intro" />
+        <x-section-heading :eyebrow="$eyebrow" :title="$title" :title-uppercase="$titleUppercase" :body="$body" class="future-intro" />
 
         @if ($imageUrl)
           <div class="future-feature-image">

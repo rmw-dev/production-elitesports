@@ -34,6 +34,7 @@ class Contact extends BaseBlock
     {
         return [
             'title' => get_field('title'),
+            'titleUppercase' => (bool) get_field('title_uppercase'),
             'body' => get_field('body'),
             'addressLines' => get_field('address') ?: [],
             'phoneLabel' => get_field('phone_label'),

@@ -34,6 +34,7 @@ class Training extends BaseBlock
         return [
             'eyebrow' => get_field('eyebrow'),
             'title' => get_field('title'),
+            'titleUppercase' => (bool) get_field('title_uppercase'),
             'body' => get_field('body'),
             'image' => get_field('image') ?: [],
             'pillars' => get_field('pillars') ?: [],

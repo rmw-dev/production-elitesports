@@ -12,7 +12,7 @@
       <div class="@if($isSplit) grid gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-start @endif">
         @if ($eyebrow || $title || $body || $introExtra || ! empty($buttons))
           <div>
-            <x-section-heading :eyebrow="$eyebrow" :title="$title" :body="$body" />
+            <x-section-heading :eyebrow="$eyebrow" :title="$title" :title-uppercase="$titleUppercase" :body="$body" />
             @if ($introExtra)
               <p class="mt-6 max-w-xl text-base leading-7 text-white/70 md:text-lg">{{ $introExtra }}</p>
             @endif

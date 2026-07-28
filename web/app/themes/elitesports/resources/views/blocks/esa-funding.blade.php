@@ -4,7 +4,7 @@
       <div class="pointer-events-none absolute right-0 top-0 h-56 w-56 rounded-full bg-[#7c44bc]/16 blur-3xl"></div>
       <div class="relative grid gap-10 lg:grid-cols-[minmax(0,0.96fr)_1px_minmax(280px,0.58fr)] lg:items-center">
         <div>
-          <x-section-heading :eyebrow="$eyebrow" :title="$title" :body="$body" />
+          <x-section-heading :eyebrow="$eyebrow" :title="$title" :title-uppercase="$titleUppercase" :body="$body" />
           @if ($introExtra)
             <p class="mt-6 max-w-2xl text-base leading-7 text-white/68 md:text-lg">{{ $introExtra }}</p>
           @endif

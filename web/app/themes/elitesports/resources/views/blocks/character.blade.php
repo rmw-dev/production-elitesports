@@ -11,7 +11,7 @@
       @endif
 
       <div class="grid gap-10 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1fr)] lg:items-start">
-        <x-section-heading :eyebrow="$eyebrow" :title="$title" :body="$body" />
+        <x-section-heading :eyebrow="$eyebrow" :title="$title" :title-uppercase="$titleUppercase" :body="$body" />
 
         @if ($framework)
           <div class="character-framework-panel">

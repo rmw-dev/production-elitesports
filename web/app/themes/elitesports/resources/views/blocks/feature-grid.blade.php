@@ -9,7 +9,7 @@
 <section {{ $attributes->merge(['class' => trim("relative $paddingClasses $backgroundClass")]) }}>
   <div class="mx-auto max-w-7xl px-6 lg:px-8">
     @if ($eyebrow || $title || $body)
-      <x-section-heading :eyebrow="$eyebrow" :title="$title" :body="$body" class="mb-12" />
+      <x-section-heading :eyebrow="$eyebrow" :title="$title" :title-uppercase="$titleUppercase" :body="$body" class="mb-12" />
     @endif
 
     @if ($items)

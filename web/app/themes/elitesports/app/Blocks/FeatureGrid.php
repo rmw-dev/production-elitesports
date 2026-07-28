@@ -35,6 +35,7 @@ class FeatureGrid extends BaseBlock
         return [
             'eyebrow' => get_field('eyebrow'),
             'title' => get_field('title'),
+            'titleUppercase' => (bool) get_field('title_uppercase'),
             'body' => get_field('body'),
             'columns' => (int) (get_field('columns') ?: 4),
             'showNumbers' => (bool) get_field('show_numbers'),
