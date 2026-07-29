@@ -6,7 +6,7 @@
       <div class="relative grid gap-10 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
         <div>
           @if ($title)
-            <h2 class="max-w-3xl font-display text-5xl leading-none text-white md:text-6xl">{{ $title }}</h2>
+            <x-heading as="h2" :text="$title" :uppercase="$titleUppercase" class="max-w-3xl font-display text-5xl leading-none text-white md:text-6xl" />
           @endif
           @if ($body)
             <div class="mt-5 max-w-2xl text-lg leading-8 text-white/78">{!! $body !!}</div>
@@ -27,8 +27,8 @@
           </div>
         </div>
 
-        <div class="relative flex flex-col gap-3 lg:min-w-[240px]">
-          <x-buttons :buttons="$buttons" class="flex-col" />
+        <div class="relative flex !flex-col gap-3 lg:min-w-[240px]">
+          <x-buttons :buttons="$buttons" class="!flex-col" />
         </div>
       </div>
 

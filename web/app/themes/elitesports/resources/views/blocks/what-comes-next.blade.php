@@ -27,7 +27,7 @@
                   <x-icon :name="$item['icon'] ?? 'college'" class="future-card-icon" />
                 @endif
                 @if (! empty($item['title']))
-                  <h3 class="text-3xl leading-none text-white">{{ $item['title'] }}</h3>
+                  <x-heading as="h3" :text="$item['title']" :uppercase="$item['title_uppercase'] ?? false" class="text-3xl leading-none text-white" />
                 @endif
               </div>
               @if (! empty($item['copy']))

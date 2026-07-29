@@ -48,7 +48,13 @@ class WhyEsa extends BaseBlock
     {
         $fields
             ->addText('eyebrow', ['label' => 'Eyebrow', 'default_value' => 'Why Elite?'])
-            ->addText('title', ['label' => 'Title'])
+            ->addTextarea('title', ['label' => 'Title', 'rows' => 2, 'new_lines' => ''])
+            ->addTrueFalse('title_uppercase', [
+                'label' => 'Title — uppercase',
+                'instructions' => 'Display this heading in uppercase.',
+                'ui' => 1,
+                'default_value' => 0,
+            ])
             ->addWysiwyg('body', [
                 'label' => 'Body',
                 'tabs' => 'all',
@@ -81,7 +87,13 @@ class WhyEsa extends BaseBlock
                 'layout' => 'block',
                 'min' => 0,
             ])
-                ->addText('title', ['label' => 'Title'])
+                ->addTextarea('title', ['label' => 'Title', 'rows' => 2, 'new_lines' => ''])
+                ->addTrueFalse('title_uppercase', [
+                    'label' => 'Title — uppercase',
+                    'instructions' => 'Display this heading in uppercase.',
+                    'ui' => 1,
+                    'default_value' => 0,
+                ])
                 ->addWysiwyg('copy', [
                     'label' => 'Copy',
                     'tabs' => 'all',

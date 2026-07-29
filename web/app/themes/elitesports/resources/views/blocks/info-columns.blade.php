@@ -26,11 +26,11 @@
               <div class="{{ $cardBase }}">
                 @if (! empty($card['title']))
                   @if ($titleStyle === 'kicker')
-                    <p class="kicker">{{ $card['title'] }}</p>
+                    <x-heading as="p" :text="$card['title']" :uppercase="$card['title_uppercase'] ?? false" class="kicker" />
                   @elseif ($titleStyle === 'display')
-                    <p class="font-display text-4xl uppercase leading-none text-white">{{ $card['title'] }}</p>
+                    <x-heading as="p" :text="$card['title']" :uppercase="$card['title_uppercase'] ?? false" class="font-display text-4xl leading-none text-white" />
                   @else
-                    <p class="text-sm font-semibold uppercase tracking-[0.18em] text-[#ffd3a4]">{{ $card['title'] }}</p>
+                    <x-heading as="p" :text="$card['title']" :uppercase="$card['title_uppercase'] ?? false" class="text-sm font-semibold uppercase tracking-[0.18em] text-[#ffd3a4]" />
                   @endif
                 @endif
                 @if (! empty($card['body']))

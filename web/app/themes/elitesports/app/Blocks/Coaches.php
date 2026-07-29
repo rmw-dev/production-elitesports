@@ -46,7 +46,13 @@ class Coaches extends BaseBlock
     {
         $fields
             ->addText('eyebrow', ['label' => 'Eyebrow', 'default_value' => 'Elite Sports Academy'])
-            ->addText('title', ['label' => 'Title', 'default_value' => 'Meet Our Team'])
+            ->addTextarea('title', ['label' => 'Title', 'default_value' => 'Meet Our Team', 'rows' => 2, 'new_lines' => ''])
+            ->addTrueFalse('title_uppercase', [
+                'label' => 'Title — uppercase',
+                'instructions' => 'Display this heading in uppercase.',
+                'ui' => 1,
+                'default_value' => 0,
+            ])
             ->addTextarea('body', [
                 'label' => 'Intro',
                 'rows' => 3,
@@ -58,7 +64,13 @@ class Coaches extends BaseBlock
                 'layout' => 'block',
                 'min' => 0,
             ])
-                ->addText('name', ['label' => 'Name'])
+                ->addTextarea('name', ['label' => 'Name', 'rows' => 2, 'new_lines' => ''])
+                ->addTrueFalse('name_uppercase', [
+                    'label' => 'Name — uppercase',
+                    'instructions' => 'Display this heading in uppercase.',
+                    'ui' => 1,
+                    'default_value' => 0,
+                ])
                 ->addText('role', ['label' => 'Role'])
                 ->addImage('photo', [
                     'label' => 'Photo',

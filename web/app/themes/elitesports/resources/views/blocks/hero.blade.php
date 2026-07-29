@@ -89,7 +89,7 @@
         @endif
 
         @if ($headline)
-          <h1 class="hero-title mt-5">{{ $headline }}</h1>
+          <x-heading as="h1" :text="$headline" :uppercase="$headlineUppercase" class="hero-title mt-5" />
         @endif
 
         @if ($brandLine)

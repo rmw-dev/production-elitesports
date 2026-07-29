@@ -13,16 +13,6 @@
     ['number' => '03', 'icon' => 'heart-pulse', 'tone' => 'orange'],
     ['number' => '04', 'icon' => 'brain', 'tone' => 'purple'],
   ];
-
-  // Split the sports title into its two display lines on the sentence boundary.
-  $sportsTitleLines = [];
-  if (! empty($sports['title'])) {
-      foreach (preg_split('/(?<=\.)\s+/', trim($sports['title'])) as $line) {
-          if ($line !== '') {
-              $sportsTitleLines[] = $line;
-          }
-      }
-  }
 @endphp
 
 <section id="training" {{ $attributes->merge(['class' => trim("relative scroll-mt-24 $paddingClasses $backgroundClass")]) }}>
@@ -34,7 +24,7 @@
             <p class="kicker">{{ $eyebrow }}</p>
           @endif
           @if ($title)
-            <h2 class="mt-4 max-w-4xl font-display text-4xl leading-none text-white md:text-5xl">{{ $title }}</h2>
+            <x-heading as="h2" :text="$title" :uppercase="$titleUppercase" class="mt-4 max-w-4xl font-display text-4xl leading-none text-white md:text-5xl" />
           @endif
           @if ($body)
             <div class="training-body prose-brand prose-lead mt-5 max-w-2xl">{!! $body !!}</div>
@@ -72,7 +62,7 @@
                   @endif
                 </span>
                 @if (! empty($pillar['title']))
-                  <h3 class="font-display text-3xl leading-none text-white">{{ $pillar['title'] }}</h3>
+                  <x-heading as="h3" :text="$pillar['title']" :uppercase="$pillar['title_uppercase'] ?? false" class="font-display text-3xl leading-none text-white" />
                 @endif
                 <span class="font-display text-3xl leading-none text-white/18">{{ $v['number'] }}</span>
               </div>
@@ -90,12 +80,8 @@
             @if (! empty($sports['label']))
               <p class="kicker">{{ $sports['label'] }}</p>
             @endif
-            @if ($sportsTitleLines)
-              <h3 class="mt-4 max-w-3xl font-display text-3xl leading-none text-white md:text-4xl">
-                @foreach ($sportsTitleLines as $line)
-                  <span class="block">{{ $line }}</span>
-                @endforeach
-              </h3>
+            @if (! empty($sports['title']))
+              <x-heading as="h3" :text="$sports['title']" :uppercase="$sports['title_uppercase'] ?? false" class="mt-4 max-w-3xl font-display text-3xl leading-none text-white md:text-4xl" />
             @endif
           </div>
 
@@ -106,7 +92,7 @@
           @endif
 
           @if (! empty($sports['intro']))
-            <p class="mt-7 text-lg font-semibold leading-7 text-white/74">{{ $sports['intro'] }}</p>
+            <p class="!mt-7 text-lg font-semibold leading-7 text-white/74">{{ $sports['intro'] }}</p>
           @endif
 
           <div class="mt-6 grid gap-7 md:grid-cols-3">
@@ -116,10 +102,10 @@
                   <h3 class="text-[0.72rem] font-semibold uppercase tracking-[0.28em] text-[#f6a65d]/72">{{ $group['label'] }}</h3>
                 @endif
                 @if (! empty($group['items']))
-                  <div class="mt-4 space-y-2">
+                  <div class="mt-4 flex flex-col gap-2">
                     @foreach ($group['items'] as $sport)
                       @if (! empty($sport['name']))
-                        <p class="font-display text-3xl leading-none text-white md:text-4xl">{{ $sport['name'] }}</p>
+                        <p class="m-0 font-display text-3xl leading-none text-white md:text-4xl">{{ $sport['name'] }}</p>
                       @endif
                     @endforeach
                   </div>

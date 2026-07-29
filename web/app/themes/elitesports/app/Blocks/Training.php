@@ -46,7 +46,13 @@ class Training extends BaseBlock
     {
         $fields
             ->addText('eyebrow', ['label' => 'Eyebrow', 'default_value' => 'Elite Training'])
-            ->addText('title', ['label' => 'Title'])
+            ->addTextarea('title', ['label' => 'Title', 'rows' => 2, 'new_lines' => ''])
+            ->addTrueFalse('title_uppercase', [
+                'label' => 'Title — uppercase',
+                'instructions' => 'Display this heading in uppercase.',
+                'ui' => 1,
+                'default_value' => 0,
+            ])
             ->addWysiwyg('body', [
                 'label' => 'Body',
                 'tabs' => 'all',
@@ -64,7 +70,13 @@ class Training extends BaseBlock
                 'layout' => 'block',
                 'min' => 0,
             ])
-                ->addText('title', ['label' => 'Title'])
+                ->addTextarea('title', ['label' => 'Title', 'rows' => 2, 'new_lines' => ''])
+                ->addTrueFalse('title_uppercase', [
+                    'label' => 'Title — uppercase',
+                    'instructions' => 'Display this heading in uppercase.',
+                    'ui' => 1,
+                    'default_value' => 0,
+                ])
                 ->addWysiwyg('copy', [
                     'label' => 'Copy',
                     'tabs' => 'all',
@@ -82,7 +94,13 @@ class Training extends BaseBlock
         $fields
             ->addGroup('sports', ['label' => 'Sports Offered', 'layout' => 'block'])
                 ->addText('label', ['label' => 'Label', 'default_value' => 'Sports Offered'])
-                ->addText('title', ['label' => 'Title'])
+                ->addTextarea('title', ['label' => 'Title', 'rows' => 2, 'new_lines' => ''])
+                ->addTrueFalse('title_uppercase', [
+                    'label' => 'Title — uppercase',
+                    'instructions' => 'Display this heading in uppercase.',
+                    'ui' => 1,
+                    'default_value' => 0,
+                ])
                 ->addImage('image', [
                     'label' => 'Team Photo',
                     'return_format' => 'array',

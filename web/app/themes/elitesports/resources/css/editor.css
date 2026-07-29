@@ -12,3 +12,18 @@
 .wp-block-post-title {
   font-size: 3rem;
 }
+
+/* Prevent inner blocks (e.g. Media+Text with wide/full alignment) from
+   visually overflowing rounded Group block containers in the editor. */
+.editor-styles-wrapper .wp-block-group {
+  overflow: hidden;
+}
+
+/* In the editor, core block-library sets
+   `.editor-styles-wrapper .wp-block-media-text { display:grid }` (0,2,0),
+   which beats the front-end fix `section.wp-block-media-text { display:block }`
+   (0,1,1). Our ACF media-text block uses the same class, so raise specificity
+   to prevent the core grid layout from squishing the inner content. */
+.editor-styles-wrapper section.wp-block-media-text {
+  display: block;
+}

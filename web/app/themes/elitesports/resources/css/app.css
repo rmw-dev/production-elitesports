@@ -3,8 +3,12 @@
 @source "../**/*.blade.php";
 @source "../**/*.js";
 
-/* Native Gutenberg content typography (scoped to .gutenberg-content). */
-@import "./gutenberg.css";
+/* Native Gutenberg content typography (scoped to .gutenberg-content).
+   Imported into the `components` layer (below Tailwind's `utilities` layer) so
+   the file's zero-specificity :where() rules are always overridable by Tailwind
+   utilities on nested ACF blocks — unlayered CSS would otherwise win over
+   layered utilities regardless of specificity. */
+@import "./gutenberg.css" layer(components);
 
 /* -------------------------------------------------------------------------
    Brand webfonts (copied from the source handoff /public/fonts)
@@ -353,6 +357,8 @@
   background-clip: padding-box;
   transform: translateZ(0);
   -webkit-mask-image: -webkit-radial-gradient(white, black);
+  text-decoration: none;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, border-color 0.3s ease-in-out;
 }
 
 .button-link::before,
@@ -930,14 +936,12 @@
   color: #f6a65d;
 }
 
-/* An eyebrow (.kicker) sits directly above a heading in most blocks. The
-   heading's prose/gutenberg top margin (1.6em — 179px at the hero's 112px font)
-   is unlayered CSS that beats Tailwind's `mt-*` utilities, and stacks on top of
-   the kicker's own spacing (and any flex `gap`), creating an oversized gap.
-   Collapse the heading's top margin so the kicker's spacing alone sets the
-   rhythm. Specificity (0,1,1) beats the :where()-scoped heading rule. */
-.kicker + :is(h1, h2, h3, h4, h5, h6),
-.kicker + .wp-block-heading {
+/* An eyebrow (.kicker) sits directly above a heading inside .gutenberg-content.
+   The heading's gutenberg top margin (1.6em) is unlayered CSS that would stack
+   on top of any flex gap or explicit margin. Scoped to .gutenberg-content so
+   ACF block templates can use Tailwind mt-* utilities freely. */
+.gutenberg-content .kicker + :is(h1, h2, h3, h4, h5, h6),
+.gutenberg-content .kicker + .wp-block-heading {
   margin-top: 0;
 }
 
@@ -1611,7 +1615,6 @@ section.wp-block-media-text {
 .character-framework-item h3 {
   font-size: 1.55rem;
   line-height: 1;
-  text-transform: uppercase;
   color: var(--color-orange);
 }
 
@@ -1813,7 +1816,6 @@ section.wp-block-media-text {
   font-size: clamp(3rem, 9vw, 6rem);
   line-height: 0.9;
   letter-spacing: 0;
-  text-transform: uppercase;
   color: #fff;
 }
 
@@ -1929,4 +1931,20 @@ html {
     transform: none;
     transition: none;
   }
+}
+
+
+.character-framework-item h3,
+.character-framework-item p:last-child {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.future-card-header *{
+  margin: 0 !important;
+
+}
+
+#contact h2{
+  margin-top: 0 !important;
 }

@@ -46,7 +46,13 @@ class Faq extends BaseBlock
     {
         $fields
             ->addText('eyebrow', ['label' => 'Eyebrow', 'default_value' => 'Family FAQs'])
-            ->addText('title', ['label' => 'Title'])
+            ->addTextarea('title', ['label' => 'Title', 'rows' => 2, 'new_lines' => ''])
+            ->addTrueFalse('title_uppercase', [
+                'label' => 'Title — uppercase',
+                'instructions' => 'Display this heading in uppercase.',
+                'ui' => 1,
+                'default_value' => 0,
+            ])
             ->addImage('image', [
                 'label' => 'Image',
                 'return_format' => 'array',
@@ -58,7 +64,13 @@ class Faq extends BaseBlock
                 'layout' => 'block',
                 'min' => 0,
             ])
-                ->addText('question', ['label' => 'Question'])
+                ->addTextarea('question', ['label' => 'Question', 'rows' => 2, 'new_lines' => ''])
+                ->addTrueFalse('question_uppercase', [
+                    'label' => 'Question — uppercase',
+                    'instructions' => 'Display this heading in uppercase.',
+                    'ui' => 1,
+                    'default_value' => 0,
+                ])
                 ->addWysiwyg('answer', [
                     'label' => 'Answer',
                     'tabs' => 'all',

@@ -5,7 +5,7 @@
       <div class="pointer-events-none absolute inset-y-0 right-0 w-1/3 bg-[linear-gradient(90deg,transparent,rgba(45,32,62,0.9))]"></div>
       <div class="relative grid gap-6 lg:grid-cols-[auto_minmax(0,1fr)] lg:items-center lg:gap-10">
         @if ($label)
-          <p class="font-display text-4xl uppercase leading-none text-[#3b245f] md:text-5xl">{{ $label }}</p>
+          <x-heading as="p" :text="$label" :uppercase="$labelUppercase" class="font-display text-4xl leading-none text-[#3b245f] md:text-5xl" />
         @endif
         @if ($body)
           <p class="max-w-4xl text-lg leading-8 text-white">{{ $body }}</p>

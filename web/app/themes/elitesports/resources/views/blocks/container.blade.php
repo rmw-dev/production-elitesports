@@ -3,13 +3,13 @@
     @if ($boxed)
       <div class="section-frame">
         @if ($eyebrow)
-          <p class="kicker mb-6">{{ $eyebrow }}</p>
+          <p class="kicker mb-4">{{ $eyebrow }}</p>
         @endif
         <InnerBlocks template="{{ $block->template }}" />
       </div>
     @else
       @if ($eyebrow)
-        <p class="kicker mb-6">{{ $eyebrow }}</p>
+        <p class="kicker mb-4">{{ $eyebrow }}</p>
       @endif
       <InnerBlocks template="{{ $block->template }}" />
     @endif

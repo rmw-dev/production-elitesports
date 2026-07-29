@@ -7,14 +7,14 @@
             <p class="kicker">{{ $eyebrow }}</p>
           @endif
           @if ($title)
-            <h2 class="mt-4 max-w-3xl text-5xl leading-none md:text-6xl">{!! $title !!}</h2>
+            <x-heading as="h2" :text="$title" :uppercase="$titleUppercase" class="mt-4 max-w-3xl text-5xl leading-none md:text-6xl" />
           @endif
           @if ($body)
             <div class="mt-5 max-w-2xl space-y-4 text-lg leading-8 text-white/78 [&_a]:text-[#ffd3a4] [&_a]:underline">{!! $body !!}</div>
           @endif
         </div>
 
-        <x-buttons :buttons="$buttons" class="lg:min-w-[420px]" />
+        <x-buttons :buttons="$buttons" class="lg:min-w-[420px] !flex-col" />
       </div>
     </div>
   </div>

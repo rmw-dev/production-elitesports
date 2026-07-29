@@ -11,7 +11,7 @@
         <p class="kicker">{{ $eyebrow }}</p>
       @endif
       @if ($title)
-        <h1 class="font-display">{!! $title !!}</h1>
+        <x-heading as="h1" :text="$title" :uppercase="$titleUppercase" class="mt-4 font-display" />
       @endif
       @if ($body)
         <div class="privacy-policy-content">{!! $body !!}</div>

@@ -74,6 +74,12 @@
   overflow-wrap: break-word;
 }
 
+.hero-subhead.prose-brand a,
+.hero-subhead a,
+.hero-meta a {
+  text-decoration: none;
+}
+
 .hero-micro {
   width: 100%;
   max-width: 32rem;

@@ -35,6 +35,7 @@ class HighlightBanner extends BaseBlock
     {
         return [
             'label' => get_field('label'),
+            'labelUppercase' => (bool) get_field('label_uppercase'),
             'body' => get_field('body'),
         ];
     }
@@ -42,7 +43,13 @@ class HighlightBanner extends BaseBlock
     public function blockFields(Builder $fields): void
     {
         $fields
-            ->addText('label', ['label' => 'Label', 'default_value' => 'The Elite Pathway'])
+            ->addTextarea('label', ['label' => 'Label', 'default_value' => 'The Elite Pathway', 'rows' => 2, 'new_lines' => ''])
+            ->addTrueFalse('label_uppercase', [
+                'label' => 'Label — uppercase',
+                'instructions' => 'Display this heading in uppercase.',
+                'ui' => 1,
+                'default_value' => 0,
+            ])
             ->addTextarea('body', [
                 'label' => 'Statement',
                 'rows' => 3,

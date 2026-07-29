@@ -30,7 +30,7 @@
                   </span>
                   <div>
                     @if (! empty($item['title']))
-                      <h3>{{ $item['title'] }}</h3>
+                      <x-heading as="h3" :text="$item['title']" :uppercase="$item['title_uppercase'] ?? false" />
                     @endif
                     @if (! empty($item['copy']))
                       {!! $item['copy'] !!}

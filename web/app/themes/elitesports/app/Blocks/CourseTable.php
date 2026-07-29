@@ -45,7 +45,13 @@ class CourseTable extends BaseBlock
     {
         $fields
             ->addText('eyebrow', ['label' => 'Eyebrow', 'default_value' => 'Course Sequence'])
-            ->addText('title', ['label' => 'Title'])
+            ->addTextarea('title', ['label' => 'Title', 'rows' => 2, 'new_lines' => ''])
+            ->addTrueFalse('title_uppercase', [
+                'label' => 'Title — uppercase',
+                'instructions' => 'Display this heading in uppercase.',
+                'ui' => 1,
+                'default_value' => 0,
+            ])
             ->addRepeater('columns', [
                 'label' => 'Columns',
                 'button_label' => 'Add Column',

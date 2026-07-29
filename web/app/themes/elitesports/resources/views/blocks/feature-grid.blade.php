@@ -21,7 +21,7 @@
               <span class="font-display text-3xl leading-none text-{{ $accent }}">{{ sprintf('%02d', $i + 1) }}</span>
             @endif
             @if (! empty($item['title']))
-              <h3 class="font-display text-xl tracking-tight text-white">{{ $item['title'] }}</h3>
+              <x-heading as="h3" :text="$item['title']" :uppercase="$item['title_uppercase'] ?? false" class="font-display text-xl tracking-tight text-white" />
             @endif
             @if (! empty($item['copy']))
               <div class="prose-brand text-sm">{!! $item['copy'] !!}</div>

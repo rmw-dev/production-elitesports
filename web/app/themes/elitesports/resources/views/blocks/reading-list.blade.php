@@ -8,7 +8,7 @@
           <div class="grid gap-4">
             @foreach ($rows as $row)
               <div class="grid gap-3 rounded-[28px] border border-white/10 bg-black/24 p-5 md:grid-cols-[8rem_minmax(0,1fr)] md:gap-5">
-                <p class="font-display text-3xl text-white/42 md:text-4xl">{{ $row['label'] ?? '' }}</p>
+                <x-heading as="p" :text="$row['label'] ?? ''" :uppercase="$row['label_uppercase'] ?? false" class="font-display text-3xl text-white/42 md:text-4xl" />
                 <div class="grid gap-3">
                   @foreach (($row['items'] ?? []) as $item)
                     <p class="text-base leading-7 text-white/76">{{ $item['text'] ?? '' }}</p>

@@ -11,7 +11,7 @@
         <p class="kicker">{{ $eyebrow }}</p>
       @endif
       @if ($title)
-        <h1 class="font-display mt-5 max-w-[7.5ch] text-5xl uppercase leading-[0.88] text-white sm:max-w-4xl sm:text-7xl lg:text-8xl">{!! $title !!}</h1>
+        <x-heading as="h1" :text="$title" :uppercase="$titleUppercase" class="font-display mt-4 max-w-[7.5ch] text-5xl leading-[0.88] text-white sm:max-w-4xl sm:text-7xl lg:text-8xl" />
       @endif
       @if ($body)
         <p class="mt-6 max-w-2xl text-lg leading-8 text-white/72">{{ $body }}</p>
@@ -44,7 +44,7 @@
             @endif
             <div class="min-w-0 flex-1">
               <div class="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-                <h2 class="font-display text-4xl leading-[0.92] text-white sm:text-5xl">{{ $coach['name'] ?? '' }}</h2>
+                <x-heading as="h2" :text="$coach['name'] ?? ''" :uppercase="$coach['name_uppercase'] ?? false" class="font-display text-4xl leading-[0.92] text-white sm:text-5xl" />
                 @if (! empty($coach['role']))
                   <p class="coach-role-badge">{{ $coach['role'] }}</p>
                 @endif

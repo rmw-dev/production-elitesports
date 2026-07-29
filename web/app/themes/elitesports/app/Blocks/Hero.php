@@ -83,6 +83,7 @@ class Hero extends BaseBlock
         return [
             'eyebrow' => get_field('eyebrow'),
             'headline' => get_field('headline'),
+            'headlineUppercase' => (bool) get_field('headline_uppercase'),
             'brandLine' => get_field('brand_line'),
             'subhead' => get_field('subhead'),
             'micro' => get_field('micro'),
@@ -114,9 +115,17 @@ class Hero extends BaseBlock
                 'label' => 'Eyebrow',
                 'default_value' => 'Elite Sports Academy',
             ])
-            ->addText('headline', [
+            ->addTextarea('headline', [
                 'label' => 'Headline',
                 'default_value' => 'Where Serious Athletes Are Built',
+                'rows' => 2,
+                'new_lines' => '',
+            ])
+            ->addTrueFalse('headline_uppercase', [
+                'label' => 'Headline — uppercase',
+                'instructions' => 'Display this heading in uppercase.',
+                'ui' => 1,
+                'default_value' => 0,
             ])
             ->addText('brand_line', [
                 'label' => 'Brand Tagline',

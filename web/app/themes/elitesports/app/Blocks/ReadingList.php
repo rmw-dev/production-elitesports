@@ -46,7 +46,13 @@ class ReadingList extends BaseBlock
     {
         $fields
             ->addText('eyebrow', ['label' => 'Eyebrow', 'default_value' => 'Classical Reading'])
-            ->addText('title', ['label' => 'Title'])
+            ->addTextarea('title', ['label' => 'Title', 'rows' => 2, 'new_lines' => ''])
+            ->addTrueFalse('title_uppercase', [
+                'label' => 'Title — uppercase',
+                'instructions' => 'Display this heading in uppercase.',
+                'ui' => 1,
+                'default_value' => 0,
+            ])
             ->addWysiwyg('body', [
                 'label' => 'Intro',
                 'tabs' => 'all',
@@ -59,7 +65,13 @@ class ReadingList extends BaseBlock
                 'layout' => 'block',
                 'min' => 0,
             ])
-                ->addText('label', ['label' => 'Row Label'])
+                ->addTextarea('label', ['label' => 'Row Label', 'rows' => 2, 'new_lines' => ''])
+                ->addTrueFalse('label_uppercase', [
+                    'label' => 'Row Label — uppercase',
+                    'instructions' => 'Display this heading in uppercase.',
+                    'ui' => 1,
+                    'default_value' => 0,
+                ])
                 ->addRepeater('items', [
                     'label' => 'Items',
                     'button_label' => 'Add Item',

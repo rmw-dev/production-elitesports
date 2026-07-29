@@ -47,6 +47,45 @@
   margin-bottom: 0;
 }
 
+/* Default block gap: 4rem of vertical space before "structural" native
+   blocks (tables, images, galleries, buttons, embeds, separators, etc.) when
+   they follow another block. Text blocks keep their normal typographic rhythm,
+   and ACF blocks (rendered as full-width <section>s) manage their own section
+   spacing, so neither is targeted here. The class-qualified selector outranks
+   the per-element `:where()` margins below. */
+.gutenberg-content > * + :is(
+  .wp-block-table,
+  .wp-block-image,
+  .wp-block-gallery,
+  .wp-block-buttons,
+  .wp-block-embed,
+  .wp-block-separator,
+  .wp-block-columns,
+  .wp-block-media-text,
+  .wp-block-cover,
+  .wp-block-video,
+  .wp-block-audio,
+  .wp-block-group,
+  figure
+),
+.gutenberg-content .acf-innerblocks-container > * + :is(
+  .wp-block-table,
+  .wp-block-image,
+  .wp-block-gallery,
+  .wp-block-buttons,
+  .wp-block-embed,
+  .wp-block-separator,
+  .wp-block-columns,
+  .wp-block-media-text,
+  .wp-block-cover,
+  .wp-block-video,
+  .wp-block-audio,
+  .wp-block-group,
+  figure
+) {
+  margin-top: 4rem;
+}
+
 /* Body copy */
 :where(.gutenberg-content) p {
   margin: 0 0 1.1em;
@@ -62,6 +101,17 @@
   line-height: 1.02;
   letter-spacing: 0;
   text-transform: uppercase;
+}
+
+:where(.gutenberg-content) :is(h1, h2, h3, h4, h5, h6).normal-case {
+  text-transform: none;
+}
+
+/* Collapse the heading's 1.6em top margin when it immediately follows a kicker
+   so the kicker's bottom spacing alone (or the flex gap) controls the rhythm. */
+:where(.gutenberg-content) .kicker + :is(h1, h2, h3, h4, h5, h6),
+:where(.gutenberg-content) .kicker + .wp-block-heading {
+  margin-top: 0;
 }
 
 :where(.gutenberg-content) h1 {
@@ -189,26 +239,82 @@
   padding: 0;
 }
 
-/* Tables */
+/* Tables — styled to match the ACF CourseTable block: rounded surface-card
+   shell, translucent orange uppercase column headers, and hairline row
+   separators. Applies to both raw <table> and the core Table block. */
 :where(.gutenberg-content) table {
   width: 100%;
   margin: 1.4em 0;
   border-collapse: collapse;
+  overflow: hidden;
+  border-radius: 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.02);
   font-size: 0.95rem;
 }
 
+:where(.gutenberg-content) .wp-block-table {
+  margin: 1.4em 0;
+}
+
+:where(.gutenberg-content) .wp-block-table table {
+  margin: 0;
+}
+
 :where(.gutenberg-content) :is(th, td) {
-  padding: 0.7em 0.9em;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 1rem 4rem;
+  border: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
   text-align: left;
+  vertical-align: top;
+}
+
+:where(.gutenberg-content) :is(th, td):first-child {
+  border-left: 0;
+}
+
+:where(.gutenberg-content) tr:last-child :is(th, td) {
+  border-bottom: 0;
 }
 
 :where(.gutenberg-content) th {
-  color: #fff;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  background: rgba(255, 255, 255, 0.06);
+  color: #ffd3a4;
   font-family: var(--font-display);
+  font-size: 1.3125rem;
   font-weight: 700;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
+}
+
+:where(.gutenberg-content) td {
+  color: rgba(255, 255, 255, 0.78);
+  line-height: 1.75;
+}
+
+/* When there is no header row, treat the first row as headings. */
+:where(.gutenberg-content) table:not(:has(thead)) tr:first-child td {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  background: rgba(255, 255, 255, 0.06);
+  color: #ffd3a4;
+  font-family: var(--font-display);
+  font-size: 1.3125rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+/* Striped block style keeps the brand tint instead of the default grey. */
+:where(.gutenberg-content) .wp-block-table.is-style-stripes tbody tr:nth-child(odd) td {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+:where(.gutenberg-content) .wp-block-table figcaption {
+  margin-top: 0.75rem;
 }
 
 /* Figures / images / captions */
@@ -229,9 +335,146 @@
   text-align: center;
 }
 
-/* Buttons rendered by the core Buttons block keep their own look, but give a
-   sensible brand default when unstyled. */
+/* Buttons rendered by the core Buttons block are restyled to match the ACF
+   ButtonLink component: the default (fill) button mirrors the "primary" glass
+   pill with an animated brand-gradient border + glow, and the "outline" block
+   style mirrors the translucent "secondary" pill. Pseudo-elements sit behind
+   the label (z-index: -1) since the core markup has no content wrapper. */
 :where(.gutenberg-content) .wp-block-button__link {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  min-height: 3rem;
+  max-width: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: 1px solid transparent;
+  border-radius: 9999px;
+  padding: 0.75rem 1.25rem;
   color: #fff;
+  text-align: center;
   text-decoration: none;
+  font-size: 0.875rem;
+  line-height: 1.25;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.0005), rgba(255, 255, 255, 0.005));
+  backdrop-filter: blur(18px) saturate(1.2);
+  -webkit-backdrop-filter: blur(18px) saturate(1.2);
+  transform: translateZ(0);
+  transition: transform 0.3s ease, box-shadow 0.3s ease-out, border-color 0.3s ease-out;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.32),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.26),
+    0 16px 34px rgba(0, 0, 0, 0.34),
+    -14px 0 34px rgba(246, 140, 41, 0.32),
+    14px 0 38px rgba(113, 64, 177, 0.32),
+    0 0 34px rgba(246, 140, 41, 0.12),
+    0 0 42px rgba(113, 64, 177, 0.12);
+}
+
+:where(.gutenberg-content) .wp-block-button__link::before,
+:where(.gutenberg-content) .wp-block-button__link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+/* Brand-gradient border ring. */
+:where(.gutenberg-content) .wp-block-button__link::before {
+  padding: 1.5px;
+  background: linear-gradient(90deg, #f68c29 0%, #e56f1f 24%, #7140b1 72%, #4f248b 100%);
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  transition: background 0.3s ease-out;
+}
+
+/* Inner glass glow. */
+:where(.gutenberg-content) .wp-block-button__link::after {
+  inset: 1.5px;
+  background:
+    radial-gradient(circle at 0% 50%, rgba(246, 140, 41, 0.28), transparent 36%),
+    radial-gradient(circle at 100% 50%, rgba(113, 64, 177, 0.32), transparent 40%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.2), transparent 46%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.025));
+}
+
+:where(.gutenberg-content) .wp-block-button__link:hover {
+  transform: translateY(-0.125rem) translateZ(0);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.38),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.26),
+    0 20px 42px rgba(0, 0, 0, 0.38),
+    -18px 0 44px rgba(246, 140, 41, 0.42),
+    18px 0 48px rgba(113, 64, 177, 0.42),
+    0 0 42px rgba(246, 140, 41, 0.18),
+    0 0 52px rgba(113, 64, 177, 0.18);
+}
+
+:where(.gutenberg-content) .wp-block-button__link:hover::before {
+  background: linear-gradient(90deg, #ff9a3d 0%, #f68c29 24%, #7c3aed 72%, #5b2da0 100%);
+}
+
+:where(.gutenberg-content) .wp-block-button__link:active {
+  transform: translateY(0) translateZ(0);
+}
+
+/* The first button in a Buttons block stays "primary" (fill); every button
+   after it — or any button using the "outline" block style — becomes the
+   translucent "secondary" pill. */
+:where(.gutenberg-content) .wp-block-button:not(:first-child) .wp-block-button__link,
+:where(.gutenberg-content) .wp-block-button.is-style-outline .wp-block-button__link {
+  border-color: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(14px) saturate(1.08);
+  -webkit-backdrop-filter: blur(14px) saturate(1.08);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 14px 28px rgba(0, 0, 0, 0.22),
+    -8px 0 22px rgba(246, 140, 41, 0.08),
+    8px 0 24px rgba(113, 64, 177, 0.08);
+}
+
+:where(.gutenberg-content) .wp-block-button:not(:first-child) .wp-block-button__link::before,
+:where(.gutenberg-content) .wp-block-button.is-style-outline .wp-block-button__link::before {
+  padding: 0;
+  background:
+    radial-gradient(circle at 0% 50%, rgba(246, 140, 41, 0.08), transparent 42%),
+    radial-gradient(circle at 100% 50%, rgba(113, 64, 177, 0.09), transparent 42%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.04));
+  -webkit-mask: none;
+  mask-composite: initial;
+  transition: background 0.3s ease-out;
+}
+
+:where(.gutenberg-content) .wp-block-button:not(:first-child) .wp-block-button__link::after,
+:where(.gutenberg-content) .wp-block-button.is-style-outline .wp-block-button__link::after {
+  content: none;
+}
+
+:where(.gutenberg-content) .wp-block-button:not(:first-child) .wp-block-button__link:hover,
+:where(.gutenberg-content) .wp-block-button.is-style-outline .wp-block-button__link:hover {
+  transform: translateY(-0.125rem) translateZ(0);
+  border-color: rgba(255, 255, 255, 0.24);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.13),
+    0 16px 34px rgba(0, 0, 0, 0.25),
+    -10px 0 26px rgba(246, 140, 41, 0.12),
+    10px 0 28px rgba(113, 64, 177, 0.12);
+}
+
+:where(.gutenberg-content) .wp-block-button:not(:first-child) .wp-block-button__link:hover::before,
+:where(.gutenberg-content) .wp-block-button.is-style-outline .wp-block-button__link:hover::before {
+  background:
+    radial-gradient(circle at 0% 50%, rgba(246, 140, 41, 0.08), transparent 42%),
+    radial-gradient(circle at 100% 50%, rgba(113, 64, 177, 0.09), transparent 42%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.04));
 }
