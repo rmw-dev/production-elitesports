@@ -351,15 +351,22 @@
   gap: 0.5rem;
   border: 1px solid transparent;
   border-radius: 9999px;
-  padding: 0.75rem 1.25rem;
+  /* !important: WP core outputs an unlayered global-styles reset
+     ":root :where(.wp-element-button,.wp-block-button__link){font-size:inherit;
+     letter-spacing:inherit;font-weight:inherit;text-transform:inherit}" plus
+     core block-library padding/line-height. gutenberg.css is imported into
+     layer(components), and unlayered CSS always beats layered CSS regardless of
+     specificity — so these button typography props must be !important to match
+     the site's ButtonLink. */
+  padding: 0.75rem 1.25rem !important;
   color: #fff;
   text-align: center;
   text-decoration: none;
-  font-size: 0.875rem;
-  line-height: 1.25;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-size: 0.875rem !important;
+  line-height: 1.25 !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.0005), rgba(255, 255, 255, 0.005));
   backdrop-filter: blur(18px) saturate(1.2);
   -webkit-backdrop-filter: blur(18px) saturate(1.2);
