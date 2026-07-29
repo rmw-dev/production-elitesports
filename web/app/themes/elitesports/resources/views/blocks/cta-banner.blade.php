@@ -14,7 +14,7 @@
           @endif
         </div>
 
-        <x-buttons :buttons="$buttons" class="lg:min-w-[420px] !flex-col" />
+        <x-buttons :buttons="$buttons" class="lg:min-w-[350px] !flex-col" />
       </div>
     </div>
   </div>
