@@ -8,7 +8,7 @@
 
 <section {{ $attributes->merge(['class' => trim("relative scroll-mt-24 $paddingClasses $backgroundClass")]) }}>
   <div class="mx-auto max-w-7xl px-6 lg:px-8">
-    <div class="@if($isSplit) section-frame @endif">
+    <div class="section-frame">
       <div class="@if($isSplit) grid gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-start @endif">
         @if ($eyebrow || $title || $body || $introExtra || ! empty($buttons))
           <div>
