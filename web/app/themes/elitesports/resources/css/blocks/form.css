@@ -101,7 +101,10 @@
   box-shadow: 0 0 0 3px rgba(246, 140, 41, 0.18);
 }
 
-/* Submit — solid brand-gradient pill mirroring x-button-link tertiary. */
+/* Submit — mirrors the site's .button-link-secondary pill: a subtle
+   translucent glass button with a faint white border (no gradient border/glow).
+   Sizing/typography mirror the shared `$base`: min-h-12 (3rem), px-5 py-3,
+   text-sm, font-semibold, tracking-[0.08em]. */
 .esa-form .cf7-actions {
   margin: 1.6rem 0 0;
 }
@@ -112,25 +115,42 @@
   align-items: center;
   justify-content: center;
   min-height: 3rem;
-  padding: 0.85rem 2rem;
-  border: 0;
+  padding: 0.75rem 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 9999px;
-  background-image: var(--gradient-brand);
+  background: rgba(255, 255, 255, 0.04);
   color: #fff;
   font-family: var(--font-sans);
-  font-size: 0.8rem;
+  font-size: 0.875rem;
+  line-height: 1.1;
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   cursor: pointer;
-  transition: filter 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 18px 40px rgba(229, 111, 31, 0.28);
+  -webkit-backdrop-filter: blur(14px) saturate(1.08);
+  backdrop-filter: blur(14px) saturate(1.08);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, border-color 0.3s ease-in-out;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 14px 28px rgba(0, 0, 0, 0.22),
+    -8px 0 22px rgba(246, 140, 41, 0.08),
+    8px 0 24px rgba(113, 64, 177, 0.08);
 }
 
 .esa-form .cf7-submit:hover,
 .esa-form input.wpcf7-submit:hover {
-  background-image: var(--gradient-brand-hover);
-  transform: translateY(-1px);
+  transform: translateY(-0.125rem);
+  border-color: rgba(255, 255, 255, 0.24);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.13),
+    0 16px 34px rgba(0, 0, 0, 0.25),
+    -10px 0 26px rgba(246, 140, 41, 0.12),
+    10px 0 28px rgba(113, 64, 177, 0.12);
+}
+
+.esa-form .cf7-submit:active,
+.esa-form input.wpcf7-submit:active {
+  transform: translateY(0);
 }
 
 .esa-form .cf7-submit:disabled,

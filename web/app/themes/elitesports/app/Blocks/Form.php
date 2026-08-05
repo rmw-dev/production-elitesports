@@ -73,6 +73,11 @@ class Form extends BaseBlock
 
     /**
      * Build the list of available Contact Form 7 forms for the select field.
+     *
+     * Choices are keyed by the CF7 hash (a hex string) rather than the numeric
+     * post ID: ACF's acf_encode_choices() drops integer array keys and would
+     * otherwise store the label as the value. The hash also renders reliably
+     * via the [contact-form-7] shortcode.
      */
     protected function formChoices(): array
     {
@@ -86,7 +91,8 @@ class Form extends BaseBlock
         $choices = [];
 
         foreach ($forms as $form) {
-            $choices[$form->ID] = $form->post_title ?: "Form #{$form->ID}";
+            $hash = get_post_meta($form->ID, '_hash', true) ?: (string) $form->ID;
+            $choices[$hash] = $form->post_title ?: "Form #{$form->ID}";
         }
 
         return $choices;
@@ -94,13 +100,34 @@ class Form extends BaseBlock
 
     /**
      * Render the selected form via the Contact Form 7 shortcode.
+     *
+     * Resolves the stored value flexibly — CF7 hash, numeric ID, or (for legacy
+     * blocks saved before the hash change) the form title.
      */
-    protected function renderForm($formId): string
+    protected function renderForm($value): string
     {
-        if (! $formId || ! function_exists('do_shortcode')) {
+        if (! $value || ! class_exists('WPCF7_ContactForm') || ! function_exists('do_shortcode')) {
             return '';
         }
 
-        return do_shortcode('[contact-form-7 id="' . (int) $formId . '"]');
+        $form = null;
+
+        if (function_exists('wpcf7_get_contact_form_by_hash')) {
+            $form = wpcf7_get_contact_form_by_hash($value);
+        }
+
+        if (! $form && is_numeric($value)) {
+            $form = wpcf7_contact_form((int) $value);
+        }
+
+        if (! $form && function_exists('wpcf7_get_contact_form_by_title')) {
+            $form = wpcf7_get_contact_form_by_title($value);
+        }
+
+        if (! $form) {
+            return '';
+        }
+
+        return do_shortcode('[contact-form-7 id="' . esc_attr($form->hash()) . '"]');
     }
 }
