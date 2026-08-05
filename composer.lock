@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "34a4ffc551c9f9e423fc23a02b2f910c",
+    "content-hash": "f50168d913ae04c773b67a27f9200e1d",
     "packages": [
         {
             "name": "composer/installers",
@@ -1088,6 +1088,68 @@
                 }
             ],
             "time": "2026-07-06T19:11:50+00:00"
+        },
+        {
+            "name": "wp-plugin/contact-form-7",
+            "version": "6.1.6",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/contact-form-7/",
+                "reference": "tags/6.1.6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/contact-form-7.6.1.6.zip"
+            },
+            "require": {
+                "composer/installers": "~1.0|~2.0"
+            },
+            "type": "wordpress-plugin",
+            "notification-url": "https://wp-packages.org/downloads",
+            "authors": [
+                {
+                    "name": "Rock Lobster Inc."
+                }
+            ],
+            "description": "Just another contact form plugin. Simple but flexible.",
+            "homepage": "https://contactform7.com/",
+            "support": {
+                "changelog": "https://wordpress.org/plugins/contact-form-7/#developers",
+                "issues": "https://wordpress.org/support/plugin/contact-form-7",
+                "source": "https://plugins.svn.wordpress.org/contact-form-7"
+            },
+            "time": "2026-05-15T03:01:03+00:00"
+        },
+        {
+            "name": "wp-plugin/google-site-kit",
+            "version": "1.184.0",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/google-site-kit/",
+                "reference": "tags/1.184.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/google-site-kit.1.184.0.zip"
+            },
+            "require": {
+                "composer/installers": "~1.0|~2.0"
+            },
+            "type": "wordpress-plugin",
+            "notification-url": "https://wp-packages.org/downloads",
+            "authors": [
+                {
+                    "name": "Google"
+                }
+            ],
+            "description": "Site Kit is a one-stop solution for WordPress users to use everything Google has to offer to make them successful on the web.",
+            "homepage": "https://sitekit.withgoogle.com",
+            "support": {
+                "changelog": "https://wordpress.org/plugins/google-site-kit/#developers",
+                "issues": "https://wordpress.org/support/plugin/google-site-kit",
+                "source": "https://plugins.svn.wordpress.org/google-site-kit"
+            },
+            "time": "2026-07-27T19:11:07+00:00"
         },
         {
             "name": "wp-plugin/resizable-editor-sidebar",

@@ -1,0 +1,182 @@
+/* -------------------------------------------------------------------------
+   Form block — Contact Form 7 styled to the ESA brand.
+
+   Loaded on demand via App\Blocks\BaseBlock::assets() only when the Form block
+   is on the page. Theme tokens (var(--color-*), var(--font-display)) are
+   emitted globally to :root by resources/css/app.css, so plain CSS may
+   reference them here.
+
+   Markup contract (see scripts/seed-contact-form.php):
+     .cf7-grid          → responsive field grid
+     .cf7-field         → single field wrapper (label + control)
+     .cf7-field--full   → full-width field
+     .cf7-label/.cf7-req→ field label + required marker
+     .cf7-input/.cf7-textarea → controls
+     .cf7-actions/.cf7-submit → submit row + button
+   ------------------------------------------------------------------------- */
+
+.esa-form .wpcf7 {
+  width: 100%;
+}
+
+.esa-form .cf7-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.15rem;
+}
+
+@media (min-width: 640px) {
+  .esa-form .cf7-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.esa-form .cf7-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: 0;
+}
+
+.esa-form .cf7-field--full {
+  grid-column: 1 / -1;
+}
+
+.esa-form .cf7-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.esa-form .cf7-req {
+  margin-left: 0.25rem;
+  color: var(--color-orange-bright);
+}
+
+.esa-form .wpcf7-form-control-wrap {
+  display: block;
+}
+
+/* Inputs & textarea — translucent glass fields matching the site panels. */
+.esa-form .cf7-input,
+.esa-form .cf7-textarea,
+.esa-form input.wpcf7-form-control:not([type="submit"]),
+.esa-form textarea.wpcf7-form-control {
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.04);
+  padding: 0.85rem 1rem;
+  font-family: var(--font-sans);
+  font-size: 0.98rem;
+  line-height: 1.5;
+  color: #fff;
+  transition: border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.esa-form .cf7-textarea,
+.esa-form textarea.wpcf7-form-control {
+  min-height: 9rem;
+  resize: vertical;
+}
+
+.esa-form .cf7-input::placeholder,
+.esa-form .cf7-textarea::placeholder,
+.esa-form input.wpcf7-form-control::placeholder,
+.esa-form textarea.wpcf7-form-control::placeholder {
+  color: rgba(255, 255, 255, 0.38);
+}
+
+.esa-form .cf7-input:focus,
+.esa-form .cf7-textarea:focus,
+.esa-form input.wpcf7-form-control:focus,
+.esa-form textarea.wpcf7-form-control:focus {
+  outline: none;
+  border-color: rgba(246, 140, 41, 0.6);
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 0 0 3px rgba(246, 140, 41, 0.18);
+}
+
+/* Submit — solid brand-gradient pill mirroring x-button-link tertiary. */
+.esa-form .cf7-actions {
+  margin: 1.6rem 0 0;
+}
+
+.esa-form .cf7-submit,
+.esa-form input.wpcf7-submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3rem;
+  padding: 0.85rem 2rem;
+  border: 0;
+  border-radius: 9999px;
+  background-image: var(--gradient-brand);
+  color: #fff;
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: filter 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 18px 40px rgba(229, 111, 31, 0.28);
+}
+
+.esa-form .cf7-submit:hover,
+.esa-form input.wpcf7-submit:hover {
+  background-image: var(--gradient-brand-hover);
+  transform: translateY(-1px);
+}
+
+.esa-form .cf7-submit:disabled,
+.esa-form input.wpcf7-submit:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* CF7 AJAX spinner alignment. */
+.esa-form .wpcf7-spinner {
+  margin: 0 0 0 0.75rem;
+}
+
+/* Validation + response messaging. */
+.esa-form .wpcf7-not-valid-tip {
+  margin-top: 0.4rem;
+  font-size: 0.8rem;
+  color: #ffb4a2;
+}
+
+.esa-form .cf7-input.wpcf7-not-valid,
+.esa-form .cf7-textarea.wpcf7-not-valid,
+.esa-form .wpcf7-not-valid {
+  border-color: rgba(255, 120, 90, 0.7);
+  box-shadow: 0 0 0 3px rgba(255, 120, 90, 0.16);
+}
+
+.esa-form .wpcf7-response-output {
+  margin: 1.25rem 0 0 !important;
+  padding: 0.85rem 1.1rem !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.04);
+  font-size: 0.9rem;
+  color: #fff;
+}
+
+.esa-form .wpcf7-mail-sent-ok {
+  border-color: rgba(120, 220, 150, 0.5) !important;
+  background: rgba(80, 200, 120, 0.12);
+}
+
+.esa-form .wpcf7-validation-errors,
+.esa-form .wpcf7-mail-sent-ng,
+.esa-form .wpcf7-aborted {
+  border-color: rgba(255, 120, 90, 0.5) !important;
+  background: rgba(255, 120, 90, 0.12);
+}
