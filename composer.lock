@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f50168d913ae04c773b67a27f9200e1d",
+    "content-hash": "27a36f60ecfb73eab5efc54557734841",
     "packages": [
         {
             "name": "composer/installers",
@@ -391,6 +391,28 @@
                 }
             ],
             "time": "2025-12-27T19:41:33+00:00"
+        },
+        {
+            "name": "pronamic/gravityforms",
+            "version": "2.10.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pronamic/gravityforms.git",
+                "reference": "ad40af1e9e2942facdc582e1aa10d351639e03b9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pronamic/gravityforms/zipball/ad40af1e9e2942facdc582e1aa10d351639e03b9",
+                "reference": "ad40af1e9e2942facdc582e1aa10d351639e03b9",
+                "shasum": ""
+            },
+            "type": "wordpress-plugin",
+            "notification-url": "https://packagist.org/downloads/",
+            "support": {
+                "issues": "https://github.com/pronamic/gravityforms/issues",
+                "source": "https://github.com/pronamic/gravityforms/tree/2.10.5"
+            },
+            "time": "2026-07-01T11:00:40+00:00"
         },
         {
             "name": "roots/bedrock-autoloader",
@@ -1088,37 +1110,6 @@
                 }
             ],
             "time": "2026-07-06T19:11:50+00:00"
-        },
-        {
-            "name": "wp-plugin/contact-form-7",
-            "version": "6.1.6",
-            "source": {
-                "type": "svn",
-                "url": "https://plugins.svn.wordpress.org/contact-form-7/",
-                "reference": "tags/6.1.6"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/contact-form-7.6.1.6.zip"
-            },
-            "require": {
-                "composer/installers": "~1.0|~2.0"
-            },
-            "type": "wordpress-plugin",
-            "notification-url": "https://wp-packages.org/downloads",
-            "authors": [
-                {
-                    "name": "Rock Lobster Inc."
-                }
-            ],
-            "description": "Just another contact form plugin. Simple but flexible.",
-            "homepage": "https://contactform7.com/",
-            "support": {
-                "changelog": "https://wordpress.org/plugins/contact-form-7/#developers",
-                "issues": "https://wordpress.org/support/plugin/contact-form-7",
-                "source": "https://plugins.svn.wordpress.org/contact-form-7"
-            },
-            "time": "2026-05-15T03:01:03+00:00"
         },
         {
             "name": "wp-plugin/google-site-kit",

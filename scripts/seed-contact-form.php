@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Seed a styled Contact Form 7 form that mirrors the ESA design.
+ * Seed a styled Gravity Form that mirrors the ESA design.
  *
  * Idempotent: updates the existing "Contact" form if one already exists,
  * otherwise creates it. Run from the Bedrock root:
@@ -9,92 +9,100 @@
  *   wp eval-file scripts/seed-contact-form.php
  */
 
-if (! class_exists('WPCF7_ContactForm')) {
-    fwrite(STDERR, "Contact Form 7 is not active.\n");
+if (! class_exists('GFAPI')) {
+    fwrite(STDERR, "Gravity Forms is not active.\n");
 
     return;
 }
 
 $title = 'Contact';
 
-// The form template. Custom `class:` tokens let the theme style every field
-// (see resources/css/blocks/form.css). Wrapper markup uses our design classes.
-$form = <<<'FORM'
-<div class="cf7-grid">
-  <p class="cf7-field">
-    <label class="cf7-label">Name<span class="cf7-req">*</span></label>
-    [text* your-name class:cf7-input autocomplete:name placeholder "Your name"]
-  </p>
-  <p class="cf7-field">
-    <label class="cf7-label">Email<span class="cf7-req">*</span></label>
-    [email* your-email class:cf7-input autocomplete:email placeholder "you@example.com"]
-  </p>
-  <p class="cf7-field cf7-field--full">
-    <label class="cf7-label">Phone</label>
-    [tel your-phone class:cf7-input autocomplete:tel placeholder "(480) 555-0100"]
-  </p>
-  <p class="cf7-field cf7-field--full">
-    <label class="cf7-label">Message<span class="cf7-req">*</span></label>
-    [textarea* your-message class:cf7-textarea rows:6 placeholder "How can we help?"]
-  </p>
-</div>
-<p class="cf7-actions">[submit class:cf7-submit "Send message"]</p>
-FORM;
+$forms = \GFAPI::get_forms(true, false, 'title', 'ASC');
 
-$mail_body = <<<'BODY'
-A new enquiry has been submitted on Elite Sports Academy.
+$existingId = 0;
 
-Name:    [your-name]
-Email:   [your-email]
-Phone:   [your-phone]
+foreach ($forms as $form) {
+    if (strcasecmp((string) ($form['title'] ?? ''), $title) === 0) {
+        $existingId = (int) ($form['id'] ?? 0);
+        break;
+    }
+}
 
-Message:
-[your-message]
-
---
-Sent from [_site_title] ([_site_url])
-BODY;
-
-$admin_email = get_option('admin_email');
-$blogname = get_option('blogname');
-
-$mail = [
-    'active' => true,
-    'subject' => "[$blogname] New contact enquiry from [your-name]",
-    'sender' => "[$blogname] <wordpress@" . preg_replace('/^www\./', '', parse_url(home_url(), PHP_URL_HOST)) . '>',
-    'recipient' => $admin_email,
-    'body' => $mail_body,
-    'additional_headers' => 'Reply-To: [your-email]',
-    'attachments' => '',
-    'use_html' => false,
-    'exclude_blank' => false,
-];
-
-$properties = [
-    'form' => $form,
-    'mail' => $mail,
-];
-
-// Find an existing form with this title to stay idempotent.
-$existing = get_posts([
-    'post_type' => 'wpcf7_contact_form',
+$formMeta = [
     'title' => $title,
-    'posts_per_page' => 1,
-    'post_status' => 'any',
-]);
+    'fields' => [
+        [
+            'id' => 1,
+            'label' => 'Name',
+            'type' => 'name',
+            'isRequired' => true,
+            'inputs' => [
+                ['id' => '1.3', 'label' => 'First'],
+                ['id' => '1.6', 'label' => 'Last'],
+            ],
+        ],
+        [
+            'id' => 2,
+            'label' => 'Email',
+            'type' => 'email',
+            'isRequired' => true,
+        ],
+        [
+            'id' => 3,
+            'label' => 'Phone',
+            'type' => 'phone',
+            'isRequired' => false,
+        ],
+        [
+            'id' => 4,
+            'label' => 'Message',
+            'type' => 'textarea',
+            'isRequired' => true,
+        ],
+    ],
+    'button' => [
+        'type' => 'text',
+        'text' => 'Send message',
+    ],
+    'description' => '',
+];
 
-if (! empty($existing)) {
-    $contact_form = WPCF7_ContactForm::get_instance($existing[0]->ID);
-    $contact_form->set_properties($properties);
-    $contact_form->save();
-    $id = $contact_form->id();
+if ($existingId > 0) {
+    $existing = \GFAPI::get_form($existingId);
+
+    if (! is_array($existing)) {
+        fwrite(STDERR, "Unable to load existing Contact form (ID {$existingId}).\n");
+        return;
+    }
+
+    // Keep confirmation and notification configuration if already customized.
+    if (! empty($existing['confirmations'])) {
+        $formMeta['confirmations'] = $existing['confirmations'];
+    }
+
+    if (! empty($existing['notifications'])) {
+        $formMeta['notifications'] = $existing['notifications'];
+    }
+
+    $result = \GFAPI::update_form($formMeta, $existingId);
+
+    if (is_wp_error($result)) {
+        fwrite(STDERR, "Failed updating Contact form: " . $result->get_error_message() . "\n");
+        return;
+    }
+
+    $id = $existingId;
     echo "Updated existing Contact form (ID {$id}).\n";
 } else {
-    $contact_form = WPCF7_ContactForm::get_template(['title' => $title]);
-    $contact_form->set_properties($properties);
-    $id = $contact_form->save();
+    $result = \GFAPI::add_form($formMeta);
+
+    if (is_wp_error($result)) {
+        fwrite(STDERR, "Failed creating Contact form: " . $result->get_error_message() . "\n");
+        return;
+    }
+
+    $id = (int) $result;
     echo "Created Contact form (ID {$id}).\n";
 }
 
-$hash = get_post_meta($id, '_hash', true);
-echo "Shortcode: [contact-form-7 id=\"" . ($hash ?: $id) . "\" title=\"{$title}\"]\n";
+echo "Shortcode: [gravityform id=\"{$id}\" title=\"false\" description=\"false\" ajax=\"true\"]\n";

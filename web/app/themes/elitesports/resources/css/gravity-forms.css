@@ -1,0 +1,255 @@
+/* -------------------------------------------------------------------------
+   Global Gravity Forms skin
+   Applies ESA styling to all Gravity Forms on the front end.
+   ------------------------------------------------------------------------- */
+
+.gform_wrapper.gform-theme,
+.gform_wrapper.gform-theme.gform-theme--framework,
+.gform_wrapper.gform-theme.gform-theme--orbital {
+  --gf-color-primary: var(--color-orange) !important;
+  --gf-color-primary-rgb: 246, 140, 41 !important;
+  --gf-color-primary-contrast: #fff !important;
+  --gf-color-primary-darker: var(--color-orange-deep) !important;
+  --gf-color-primary-lighter: var(--color-orange-bright) !important;
+  --gf-color-out-ctrl-light: rgba(255, 255, 255, 0.12) !important;
+  --gf-color-out-ctrl-light-rgb: 255, 255, 255 !important;
+  --gf-color-out-ctrl-dark: rgba(255, 255, 255, 0.72) !important;
+  --gf-color-in-ctrl: rgba(255, 255, 255, 0.04) !important;
+  --gf-color-in-ctrl-rgb: 255, 255, 255 !important;
+  --gf-color-in-ctrl-contrast: #fff !important;
+  --gf-color-in-ctrl-dark: rgba(255, 255, 255, 0.85) !important;
+  --gf-color-in-ctrl-light: rgba(255, 255, 255, 0.12) !important;
+  --gf-color-in-ctrl-primary: var(--color-orange) !important;
+  --gf-color-in-ctrl-primary-rgb: 246, 140, 41 !important;
+  --gf-color-in-ctrl-primary-contrast: #fff !important;
+  --gf-ctrl-border-color: rgba(255, 255, 255, 0.14) !important;
+  --gf-ctrl-btn-border-color-secondary: rgba(255, 255, 255, 0.2) !important;
+  --gf-ctrl-choice-size: 1.1rem !important;
+  --gf-ctrl-size: 3rem !important;
+  --gf-radius: 16px !important;
+}
+
+.gform_wrapper {
+  width: 100%;
+}
+
+.gform_wrapper .gform_required_legend,
+.gform_wrapper .gform_heading {
+  display: none;
+}
+
+.gform_wrapper .gform_fields {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.15rem;
+}
+
+@media (min-width: 640px) {
+  .gform_wrapper .gform_fields {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.gform_wrapper .gfield {
+  margin: 0;
+  padding: 0;
+}
+
+.gform_wrapper .gfield.gfield--type-textarea,
+.gform_wrapper .gfield.gfield--type-phone,
+.gform_wrapper .gfield.gfield--width-full,
+.gform_wrapper .gfield:has(textarea),
+.gform_wrapper .gfield:has(select[multiple]) {
+  grid-column: 1 / -1;
+}
+
+.gform_wrapper .gfield .ginput_container {
+  margin-top: 0.45rem;
+}
+
+.gform_wrapper .gfield_label,
+.gform_wrapper legend.gfield_label {
+  margin-bottom: 0;
+  padding-inline-start: 0.45rem;
+  font-size: 0.72rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.16em !important;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.72) !important;
+}
+
+/* Name fields render a legend instead of a standard label.
+   Use padding inset (not margin) because legend margins are unreliable. */
+.gform_wrapper fieldset.gfield--type-name {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  min-inline-size: 0;
+}
+
+.gform_wrapper .gfield--type-name .ginput_container_name {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.gform_wrapper .gfield--type-name legend.gfield_label {
+  display: block;
+  width: 100%;
+  margin: 0 !important;
+  padding-inline-start: 0.45rem !important;
+  padding-inline-end: 0 !important;
+  padding-left: 0.45rem !important;
+  padding-right: 0 !important;
+}
+
+.gform_wrapper .gform-field-label--type-sub {
+  padding-inline-start: 0.45rem;
+}
+
+.gform_wrapper .gfield_required,
+.gform_wrapper .gfield_required.gfield_required_text {
+  color: var(--color-orange-bright) !important;
+}
+
+.gform_wrapper input:not([type="submit"]):not([type="button"]):not([type="image"]):not([type="checkbox"]):not([type="radio"]):not([type="file"]),
+.gform_wrapper textarea,
+.gform_wrapper select {
+  width: 100% !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  border-radius: 16px !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+  color: #fff !important;
+  font-family: var(--font-sans) !important;
+  font-size: 0.98rem !important;
+  line-height: 1.5 !important;
+  padding: 0.85rem 1rem !important;
+  transition: border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.gform_wrapper textarea {
+  min-height: 9rem;
+  resize: vertical;
+}
+
+.gform_wrapper input::placeholder,
+.gform_wrapper textarea::placeholder {
+  color: rgba(255, 255, 255, 0.42) !important;
+}
+
+.gform_wrapper input:focus,
+.gform_wrapper textarea:focus,
+.gform_wrapper select:focus {
+  outline: none !important;
+  border-color: rgba(246, 140, 41, 0.62) !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+  box-shadow: 0 0 0 3px rgba(246, 140, 41, 0.18) !important;
+}
+
+.gform_wrapper input[type="checkbox"],
+.gform_wrapper input[type="radio"] {
+  accent-color: var(--color-orange);
+}
+
+.gform_wrapper .gchoice label,
+.gform_wrapper .gfield_checkbox label,
+.gform_wrapper .gfield_radio label {
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.gform_wrapper .gform_footer,
+.gform_wrapper .gform_page_footer {
+  margin: 1.6rem 0 0 !important;
+  padding: 0 !important;
+}
+
+.gform_wrapper .gform_button,
+.gform_wrapper button[type="submit"],
+.gform_wrapper input[type="submit"] {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  min-height: 3rem;
+  padding: 0.75rem 1.5rem !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border-radius: 9999px !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+  color: #fff !important;
+  font-family: var(--font-sans) !important;
+  font-size: 0.75rem !important;
+  line-height: 1.15 !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  cursor: pointer;
+  -webkit-backdrop-filter: blur(14px) saturate(1.08);
+  backdrop-filter: blur(14px) saturate(1.08);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, border-color 0.3s ease-in-out;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 14px 28px rgba(0, 0, 0, 0.22),
+    -8px 0 22px rgba(246, 140, 41, 0.08),
+    8px 0 24px rgba(113, 64, 177, 0.08);
+}
+
+.gform_wrapper .gform_button:hover,
+.gform_wrapper button[type="submit"]:hover,
+.gform_wrapper input[type="submit"]:hover {
+  transform: translateY(-0.125rem);
+  border-color: rgba(255, 255, 255, 0.24) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.13),
+    0 16px 34px rgba(0, 0, 0, 0.25),
+    -10px 0 26px rgba(246, 140, 41, 0.12),
+    10px 0 28px rgba(113, 64, 177, 0.12);
+}
+
+.gform_wrapper .gform_button:active,
+.gform_wrapper button[type="submit"]:active,
+.gform_wrapper input[type="submit"]:active {
+  transform: translateY(0);
+}
+
+.gform_wrapper .gform_button:disabled,
+.gform_wrapper button[type="submit"]:disabled,
+.gform_wrapper input[type="submit"]:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.gform_wrapper .gfield_validation_message,
+.gform_wrapper .validation_message {
+  margin-top: 0.4rem;
+  font-size: 0.8rem;
+  color: #ffb4a2;
+}
+
+.gform_wrapper .gfield_error input,
+.gform_wrapper .gfield_error textarea,
+.gform_wrapper .gfield_error select {
+  border-color: rgba(255, 120, 90, 0.7) !important;
+  box-shadow: 0 0 0 3px rgba(255, 120, 90, 0.16) !important;
+}
+
+.gform_wrapper .gform_validation_errors,
+.gform_wrapper .gform_confirmation_message {
+  margin: 1.25rem 0 1.25rem;
+  padding: 0.85rem 1.1rem;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.04);
+  font-size: 0.9rem;
+  color: #fff;
+}
+
+.gform_wrapper .gform_confirmation_message {
+  border-color: rgba(120, 220, 150, 0.5);
+  background: rgba(80, 200, 120, 0.12);
+}
+
+.gform_wrapper .gform_validation_errors {
+  border-color: rgba(255, 120, 90, 0.5);
+  background: rgba(255, 120, 90, 0.12);
+}

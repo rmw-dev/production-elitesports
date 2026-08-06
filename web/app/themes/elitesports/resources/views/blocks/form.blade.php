@@ -20,7 +20,7 @@
           @if ($formHtml)
             {!! $formHtml !!}
           @else
-            <p class="text-white/60">No form selected. Choose a Contact Form 7 form in the block settings.</p>
+            <p class="text-white/60">No form selected. Choose a Gravity Form in the block settings.</p>
           @endif
         </div>
       </div>

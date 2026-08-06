@@ -10,13 +10,13 @@ class Form extends BaseBlock
 
     public $slug = 'form';
 
-    public $description = 'Insert a Contact Form 7 form styled to the site design, with an optional heading and intro copy.';
+    public $description = 'Insert a Gravity Forms form styled to the site design, with an optional heading and intro copy.';
 
     public $category = 'formatting';
 
     public $icon = 'feedback';
 
-    public $keywords = ['form', 'contact', 'enquiry', 'cf7'];
+    public $keywords = ['form', 'contact', 'enquiry', 'gravity forms'];
 
     public $post_types = ['page'];
 
@@ -63,7 +63,7 @@ class Form extends BaseBlock
             ])
             ->addSelect('form_id', [
                 'label' => 'Form',
-                'instructions' => 'Choose which Contact Form 7 form to display.',
+                'instructions' => 'Choose which Gravity Form to display.',
                 'choices' => $this->formChoices(),
                 'allow_null' => 0,
                 'ui' => 1,
@@ -72,62 +72,77 @@ class Form extends BaseBlock
     }
 
     /**
-     * Build the list of available Contact Form 7 forms for the select field.
+     * Build the list of available Gravity Forms for the select field.
      *
-     * Choices are keyed by the CF7 hash (a hex string) rather than the numeric
-     * post ID: ACF's acf_encode_choices() drops integer array keys and would
-     * otherwise store the label as the value. The hash also renders reliably
-     * via the [contact-form-7] shortcode.
+     * Choices use a string key prefix (`gf_`) because ACF can normalize integer
+     * keys in select choices.
      */
     protected function formChoices(): array
     {
-        $forms = get_posts([
-            'post_type' => 'wpcf7_contact_form',
-            'numberposts' => -1,
-            'orderby' => 'title',
-            'order' => 'ASC',
-        ]);
+        if (! class_exists('GFAPI')) {
+            return [];
+        }
+
+        $forms = \GFAPI::get_forms(true, false, 'title', 'ASC');
 
         $choices = [];
 
         foreach ($forms as $form) {
-            $hash = get_post_meta($form->ID, '_hash', true) ?: (string) $form->ID;
-            $choices[$hash] = $form->post_title ?: "Form #{$form->ID}";
+            $id = (int) ($form['id'] ?? 0);
+
+            if ($id < 1) {
+                continue;
+            }
+
+            $title = trim((string) ($form['title'] ?? ''));
+            $choices['gf_' . $id] = $title !== '' ? $title : "Form #{$id}";
         }
 
         return $choices;
     }
 
     /**
-     * Render the selected form via the Contact Form 7 shortcode.
+     * Render the selected form via the Gravity Forms shortcode.
      *
-     * Resolves the stored value flexibly — CF7 hash, numeric ID, or (for legacy
-     * blocks saved before the hash change) the form title.
+     * Resolves the stored value flexibly — `gf_{id}`, numeric ID, or legacy title.
      */
     protected function renderForm($value): string
     {
-        if (! $value || ! class_exists('WPCF7_ContactForm') || ! function_exists('do_shortcode')) {
+        if (! $value || ! class_exists('GFAPI') || ! function_exists('do_shortcode')) {
             return '';
         }
 
-        $form = null;
+        $formId = 0;
 
-        if (function_exists('wpcf7_get_contact_form_by_hash')) {
-            $form = wpcf7_get_contact_form_by_hash($value);
+        if (is_numeric($value)) {
+            $formId = (int) $value;
         }
 
-        if (! $form && is_numeric($value)) {
-            $form = wpcf7_contact_form((int) $value);
+        if (! $formId && is_string($value) && preg_match('/^gf_(\d+)$/', $value, $matches)) {
+            $formId = (int) $matches[1];
         }
 
-        if (! $form && function_exists('wpcf7_get_contact_form_by_title')) {
-            $form = wpcf7_get_contact_form_by_title($value);
+        if (! $formId && is_string($value)) {
+            $forms = \GFAPI::get_forms(true, false, 'title', 'ASC');
+
+            foreach ($forms as $form) {
+                if (strcasecmp((string) ($form['title'] ?? ''), $value) === 0) {
+                    $formId = (int) ($form['id'] ?? 0);
+                    break;
+                }
+            }
         }
 
-        if (! $form) {
+        if ($formId < 1) {
             return '';
         }
 
-        return do_shortcode('[contact-form-7 id="' . esc_attr($form->hash()) . '"]');
+        $form = \GFAPI::get_form($formId);
+
+        if (! is_array($form) || empty($form['id'])) {
+            return '';
+        }
+
+        return do_shortcode('[gravityform id="' . esc_attr((string) $form['id']) . '" title="false" description="false" ajax="true"]');
     }
 }

@@ -9,6 +9,7 @@
    utilities on nested ACF blocks — unlayered CSS would otherwise win over
    layered utilities regardless of specificity. */
 @import "./gutenberg.css" layer(components);
+@import "./gravity-forms.css";
 
 /* -------------------------------------------------------------------------
    Brand webfonts (copied from the source handoff /public/fonts)

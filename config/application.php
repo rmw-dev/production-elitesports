@@ -101,6 +101,13 @@ Config::define('WP_SITEURL', env('WP_SITEURL'));
 Config::define('ACF_PRO_LICENSE', env('ACF_PRO_LICENSE'));
 
 /**
+ * Gravity Forms license
+ */
+if (env('GF_LICENSE_KEY')) {
+    Config::define('GF_LICENSE_KEY', env('GF_LICENSE_KEY'));
+}
+
+/**
  * Custom Content Directory
  */
 Config::define('CONTENT_DIR', '/app');
